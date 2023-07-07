@@ -24,6 +24,7 @@ export default function Navigation() {
 
   return (
     <Tab.Navigator
+    initialRouteName="rickandmorty"
       tabBarOptions={tabBarOptions}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
