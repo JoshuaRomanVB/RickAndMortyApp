@@ -58,8 +58,7 @@ export default function UserFavoritos() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.listContainer}>
+      <View style={styles.container}>
         <ImageBackground
           source={require("../assets/background.jpg")}
           style={styles.background}
@@ -86,7 +85,7 @@ export default function UserFavoritos() {
             />
         </ImageBackground>
       </View>
-    </SafeAreaView>
+
   );
 }
 

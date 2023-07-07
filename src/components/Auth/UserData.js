@@ -1,9 +1,29 @@
 import { View, Text, ImageBackground, StyleSheet, Image } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import CustomButton from '../CustomButton';
 import useAuth from '../../hooks/useAuth';
+import { useFocusEffect } from '@react-navigation/native';
+import { getFavoriteCountApi } from '../../api/favorito';
 
 export default function UserData() {
+  
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchFavoriteCount = async () => {
+        const favoriteCount = await getFavoriteCountApi();
+        console.log('Cantidad de favoritos:', favoriteCount);
+        setCantidadFav(favoriteCount)
+      };
+  
+      fetchFavoriteCount();
+      return () => {
+        // Limpia cualquier efecto o suscripción si es necesario
+      };
+    }, [])
+  );
+
+  const [cantidadFav, setCantidadFav] = useState('');
+
   const{auth,logout} = useAuth()
   return (
       <ImageBackground
@@ -21,6 +41,14 @@ export default function UserData() {
             <Text style={styles.username}>{auth.username}</Text>
             <Text style={styles.email}>{auth.email}</Text>
             <Text style={styles.bio}>{auth.firstName} {auth.lastName}</Text>
+
+          </View>
+
+          <View style={styles.detailsContainer}>
+      
+            <Text style={styles.bio}>Conteo favoritos</Text>
+
+            <Text style={styles.bio}>{cantidadFav}</Text>
           </View>
 
           <CustomButton title="Cerrar sesión" onPress={logout}/>

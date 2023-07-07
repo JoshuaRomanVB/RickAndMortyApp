@@ -1,24 +1,32 @@
-import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import { View, Text, StyleSheet, ImageBackground, Image } from "react-native";
 import React from "react";
 import CustomButton from "../CustomButton";
+import { useNavigation } from "@react-navigation/native";
 
-export default function InicieSesion({ navigation }) {
+export default function InicieSesion() {
+  const navigation = useNavigation();
   function irAlogin() {
-    navigation.navigate("LoginFav");
+    navigation.navigate("account");
   }
   return (
-    <View style={styles.noFavoritesContainer}>
+    <ImageBackground
+    source={require("../../assets/background.jpg")}
+    style={styles.background}
+  >
+<View style={styles.noFavoritesContainer}>
       <Text style={styles.noFavoritesText}>
         No tienes favoritos. Inicia sesión.
       </Text>
 
-      <ImageBackground
+      <Image
         source={require("../../assets/mortygif.gif")}
         style={styles.noFavoritesImage}
       />
 
       <CustomButton title="Iniciar sesión" onPress={irAlogin} />
     </View>
+  </ImageBackground>
+    
   );
 }
 const styles = StyleSheet.create({
