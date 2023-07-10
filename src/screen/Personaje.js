@@ -97,8 +97,11 @@ export default function Personaje({ route }) {
                 source={{ uri: characters.image }}
                 style={[styles.image, { borderColor: color }]} // Establece el color del borde de la imagen
               />
+              <View style={styles.aling}>
               {auth && <Favoritos id={characters.id}/>}
               
+              </View>
+            
               <Text style={[styles.status, { backgroundColor: color }]}>{characters.status}</Text>
               <TableInfo characters={characters} />
             </>
@@ -144,6 +147,9 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 180,
     borderWidth: 5,
+    alignSelf: "center",
+  },
+  aling:{
     alignSelf: "center",
   },
   name: {

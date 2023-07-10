@@ -23,6 +23,7 @@ export default function UserFavoritos() {
   const [isLoading, setIsLoading] = useState(false);
   const { auth } = useAuth();
 
+
   useFocusEffect(
     React.useCallback(() => {
       if (auth) {

@@ -5,21 +5,24 @@ import { FAVORITE_STORAGE } from "../utils/constants";
 export const getFavoriteApi = async () => {
   try {
     const response = await AsyncStorage.getItem(FAVORITE_STORAGE);
-    return JSON.parse(response || []);
+    return JSON.parse(response || '[]');
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
+
 export const addFavoriteApi = async (id) => {
   try {
-    const favorites = await getFavoriteApi();
+    const favorites = (await getFavoriteApi()) || [];
     favorites.push(id);
     await AsyncStorage.setItem(FAVORITE_STORAGE, JSON.stringify(favorites));
   } catch (error) {
     console.log(error);
   }
 };
+
 
 export const isFavoriteApi = async (id) => {
   try {
@@ -33,16 +36,17 @@ export const isFavoriteApi = async (id) => {
 
 export const removeFavoriteApi = async (id) => {
   try {
-    const favorites = await getFavoriteApi();
-    const updatedFavorites = pull(favorites, id);
+    const favorites = (await getFavoriteApi()) || [];
+    pull(favorites, id);
     await AsyncStorage.setItem(
       FAVORITE_STORAGE,
-      JSON.stringify(updatedFavorites)
+      JSON.stringify(favorites)
     );
   } catch (error) {
     console.log(error);
   }
 };
+
 
 export const getFavoriteCountApi = async () => {
   try {
